@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadro Kanban</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=ABeeZee&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="topo">
+        <h1>Quadro Kanban</h1>
+        <h2>Gerenciamento de tarefas domésticas</h2>
+        <button onclick="abrirJanela()">Nova tarefa</button>
+    </div>
+
+    <div class="quadro">
+
+        <div class="coluna" id="Tarefa" ondrop="drop(event, 'listaFazer')" ondragover="allowDrop(event)">
+            <h2>A fazer</h2>
+            <div class="listaTarefas" id="listaFazer"></div>
+            <button id="btnMaisTarefa" onclick="abrirJanela()">+Adicionar tarefa</button>
+        </div>
+
+
+        <div class="coluna" id="andamento" ondrop="drop(event, 'listaAndamento')" ondragover="allowDrop(event)">
+            <h2>Em andamento</h2>
+            <div class="listaTarefas" id="listaAndamento"></div>
+        </div>
+
+
+        <div class="coluna" id="concluido" ondrop="drop(event, 'listaConcluido')" ondragover="allowDrop(event)">
+            <h2>Concluído</h2>
+            <div class="listaTarefas" id="listaConcluido"></div>
+        </div>
+    </div>
+
+    <div id="janelaModal" class="janela">
+        <div class="conteudoJanela">
+            <span class="close" onclick="fecharJanela()">&times;</span>
+            <h2 id="tituloJanela">Adicionar nova Tarefa</h2>
+            <form id="formTarefa" onsubmit="addTarefa(event); verificarVencimento();">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" required>
+
+                <label for="descricao">Descrição</label>
+                <input type="text" id="descricao" required>
+
+                <label for="responsaveis">Responsáveis</label>
+                <input type="text" id="responsaveis" required>
+
+                <label for="prioridade">Prioridade</label>
+                <select id="prioridade" required>
+                    <option value="alta">alta</option>
+                    <option value="media">media</option>
+                    <option value="baixa">baixa</option>
+                </select>
+
+                <label for="dtVencimento">Data de Vencimento</label>
+                <input type="date" id="dtVencimento" required>
+
+                <button id="btnSubmitAdicionar" type="submit">Adicionar Tarefa</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="notificacao" class="notificacao">
+        <p id="mensagemNotificacao"></p>
+        <button onclick="fecharNotificacao()">Fechar</button>
+    </div>
+    <div id="containerNotificacoes" class="container-notificacoes"></div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
